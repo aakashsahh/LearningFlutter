@@ -14,15 +14,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.light,
-      initialRoute: "/",
+      initialRoute: MyRoutes.homeRoute,
       routes: {
-        "/":(context) => const LoginPage(),
-        MyRoutes.homeRoute:(context) => const HomePage(),
-        MyRoutes.loginRoute:(context) => const LoginPage(),
+        "/": (context) => const LoginPage(),
+        MyRoutes.homeRoute: (context) => const HomePage(),
+        MyRoutes.loginRoute: (context) => const LoginPage(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.deepPurple,
+        primarySwatch: Colors.deepPurple,
+        appBarTheme: const AppBarTheme(
+            color: Colors.transparent,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+              size: 30,
+            ),
+            titleTextStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            )),
       ),
     );
   }
