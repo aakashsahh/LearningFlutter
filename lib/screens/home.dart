@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learnflutter/widgets/drawer.dart';
 
 import '../models/catalog.dart';
-
+import 'detal_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,16 +32,23 @@ class _HomePageState extends State<HomePage> {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     Product product = products[index];
-                    return Card(
-                      child: ListTile(
-                        leading: Image.network(product.image),
-                        title: Text(product.name),
-                        subtitle: Text(product.desc),
-                        trailing: Text('\$${product.price}',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                            )),
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => DetailScreen(product: product) ,));
+                      },
+                      child: Card(
+                        child: ListTile(
+                          leading: Hero(
+                            tag: Key(product.id.toString()),
+                            child: Image.network(product.image)),
+                          title: Text(product.name),
+                          subtitle: Text(product.desc),
+                          trailing: Text('\$${product.price}',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                              )),
+                        ),
                       ),
                     );
                   },
