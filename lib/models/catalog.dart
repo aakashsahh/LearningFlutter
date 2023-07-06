@@ -8,6 +8,7 @@ class Product {
   final int price;
   final String color;
   final String image;
+  int quantity = 1;
 
   Product({
     required this.id,
@@ -35,5 +36,4 @@ Future<List<Product>> loadProducts() async {
   }).toList();
 
   return products;
-  
 }
