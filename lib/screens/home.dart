@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learnflutter/screens/cart_page.dart';
 import 'package:learnflutter/widgets/drawer.dart';
 
 import '../models/catalog.dart';
@@ -16,10 +17,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Catalog App"),
+        title: const Text(
+          "Catalog App",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+        ),
         elevation: 0.0,
       ),
       drawer: const MyDrawer(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CartPage(),
+              ));
+        },
+        backgroundColor: const Color.fromARGB(255, 48, 14, 77),
+        child: const Icon(
+          Icons.shopping_cart,
+        ),
+      ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: FutureBuilder<List<Product>>(
@@ -34,20 +51,44 @@ class _HomePageState extends State<HomePage> {
                     Product product = products[index];
                     return InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => DetailScreen(product: product) ,));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailScreen(product: product),
+                            ));
                       },
                       child: Card(
-                        child: ListTile(
-                          leading: Hero(
-                            tag: Key(product.id.toString()),
-                            child: Image.network(product.image)),
-                          title: Text(product.name),
-                          subtitle: Text(product.desc),
-                          trailing: Text('\$${product.price}',
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400,
-                              )),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading: Hero(tag: Key(product.id.toString()), child: Image.network(product.image)),
+                                title: Text(product.name),
+                                subtitle: Text(product.desc),
+                                trailing: Text('\$${product.price}',
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                    )),
+                              ),
+                              ButtonBar(
+                                alignment: MainAxisAlignment.end,
+                                buttonPadding: EdgeInsets.zero,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text(
+                                      "Add to Cart",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );

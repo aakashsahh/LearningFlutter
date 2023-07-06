@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 class Product {
-  final int id;
+  late final int id;
   final String name;
   final String desc;
   final int price;
@@ -35,6 +35,5 @@ Future<List<Product>> loadProducts() async {
   }).toList();
 
   return products;
+  
 }
-
-
